@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Aspirasi - Pemilihan Ketua IKATA VII</title>
+    
+    <!-- Menggunakan Tailwind CSS untuk styling modern dan responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Menggunakan Font Inter dari Google Fonts untuk tampilan yang bersih dan modern -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Mengaplikasikan font Inter ke seluruh halaman */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Warna latar belakang netral */
+        }
+        
+        /* Efek gradien pada latar belakang header untuk tampilan dinamis */
+        .header-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        }
+
+        /* Style kustom untuk radio button rating agar lebih menarik */
+        .rating-input:checked + .rating-label {
+            background-color: #fbbf24; /* Warna kuning dari logo (amber-400) */
+            color: #1f2937; /* Warna teks gelap agar kontras */
+            border-color: #f59e0b; /* Warna kuning lebih gelap (amber-500) */
+            transform: scale(1.1);
+        }
+        .rating-label {
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* Animasi sederhana untuk memunculkan form */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <main class="max-w-2xl w-full bg-white dark:bg-slate-800 rounded-2xl shadow-2xl overflow-hidden fade-in">
+        <!-- Header dengan Logo dan Tema Pemilu -->
+        <div class="header-gradient p-8 text-center relative">
+            <img src="https://storage.googleapis.com/gemini-prod/images/1000931227.jpg" alt="Logo IKATA" class="mx-auto h-24 w-24 rounded-full shadow-lg border-4 border-white">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-4 tracking-tight">SUARA IKATA 2024</h1>
+            <p class="text-md text-blue-200 mt-1">Survey Penjaringan Aspirasi Calon Ketua Periode 2025-2029</p>
+        </div>
+
+        <div class="p-6 sm:p-8">
+            <!-- Form Survey -->
+            <form id="surveyForm" class="space-y-8">
+                <!-- Pertanyaan 1: Evaluasi Kinerja -->
+                <div>
+                    <label class="block text-lg font-semibold text-slate-800 dark:text-slate-100">
+                        <span class="text-blue-600 font-bold">01.</span> Evaluasi Kinerja Periode Saat Ini
+                    </label>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Bagaimana penilaian Anda terhadap kinerja kepemimpinan IKATA secara keseluruhan? (1: Sangat Buruk - 5: Sangat Baik)</p>
+                    <div class="mt-4 flex flex-wrap justify-center gap-3">
+                        <!-- Pilihan Rating 1-5 -->
+                        <div class="flex items-center">
+                            <input required type="radio" id="rating1" name="kinerja" value="1" class="sr-only rating-input">
+                            <label for="rating1" class="rating-label flex items-center justify-center w-12 h-12 rounded-full border-2 border-slate-300 dark:border-slate-600 cursor-pointer font-bold text-slate-700 dark:text-slate-300">1</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="rating2" name="kinerja" value="2" class="sr-only rating-input">
+                            <label for="rating2" class="rating-label flex items-center justify-center w-12 h-12 rounded-full border-2 border-slate-300 dark:border-slate-600 cursor-pointer font-bold text-slate-700 dark:text-slate-300">2</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="rating3" name="kinerja" value="3" class="sr-only rating-input">
+                            <label for="rating3" class="rating-label flex items-center justify-center w-12 h-12 rounded-full border-2 border-slate-300 dark:border-slate-600 cursor-pointer font-bold text-slate-700 dark:text-slate-300">3</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="rating4" name="kinerja" value="4" class="sr-only rating-input">
+                            <label for="rating4" class="rating-label flex items-center justify-center w-12 h-12 rounded-full border-2 border-slate-300 dark:border-slate-600 cursor-pointer font-bold text-slate-700 dark:text-slate-300">4</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="rating5" name="kinerja" value="5" class="sr-only rating-input">
+                            <label for="rating5" class="rating-label flex items-center justify-center w-12 h-12 rounded-full border-2 border-slate-300 dark:border-slate-600 cursor-pointer font-bold text-slate-700 dark:text-slate-300">5</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pertanyaan 2: Penjaringan Calon -->
+                <div>
+                    <label for="calon1" class="block text-lg font-semibold text-slate-800 dark:text-slate-100">
+                        <span class="text-blue-600 font-bold">02.</span> Rekomendasi Calon Ketua
+                    </label>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Menurut Anda, siapa figur yang paling layak dicalonkan sebagai Ketua IKATA periode 2025-2029? (Sebutkan hingga 3 nama)</p>
+                    <div class="mt-4 space-y-3">
+                        <!-- Input untuk nama calon -->
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">1.</span>
+                            <input type="text" id="calon1" name="calon1" placeholder="Nama Calon Rekomendasi 1" class="w-full p-3 pl-8 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        </div>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">2.</span>
+                            <input type="text" id="calon2" name="calon2" placeholder="Nama Calon Rekomendasi 2 (Opsional)" class="w-full p-3 pl-8 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        </div>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">3.</span>
+                            <input type="text" id="calon3" name="calon3" placeholder="Nama Calon Rekomendasi 3 (Opsional)" class="w-full p-3 pl-8 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Jaminan Anonimitas -->
+                <div class="!mt-10 text-center text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 p-3 rounded-lg flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5.026a11.954 11.954 0 01-1.606 5.862A11.954 11.954 0 0110 18.056a11.954 11.954 0 019.44-7.168 11.954 11.954 0 01-1.606-5.862A11.954 11.954 0 0110 1.944zM9 11a1 1 0 112 0v2a1 1 0 11-2 0v-2zm1-4a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Kami menjamin <strong>100% kerahasiaan</strong> jawaban Anda.</span>
+                </div>
+
+                <!-- Tombol Submit -->
+                <button type="submit" class="w-full bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Kirim Jawaban Saya
+                </button>
+            </form>
+            
+            <!-- Pesan Sukses (tersembunyi) -->
+            <div id="successMessage" class="hidden text-center p-8">
+                 <svg class="mx-auto h-20 w-20 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                 </svg>
+                <h2 class="text-2xl font-bold text-slate-800 dark:text-white mt-4">Terima Kasih!</h2>
+                <p class="text-slate-600 dark:text-slate-300 mt-2">Suara Anda telah berhasil direkam. Partisipasi Anda sangat berarti untuk masa depan IKATA yang lebih baik.</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-6">Panitia Pemilu IKATA VII</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // JavaScript sederhana untuk menangani pengiriman form
+        const surveyForm = document.getElementById('surveyForm');
+        const successMessage = document.getElementById('successMessage');
+
+        surveyForm.addEventListener('submit', function(event) {
+            // Mencegah halaman reload saat form dikirim
+            event.preventDefault();
+
+            // Validasi sederhana: pastikan rating sudah dipilih
+            const rating = document.querySelector('input[name="kinerja"]:checked');
+            if (!rating) {
+                alert('Mohon berikan penilaian kinerja terlebih dahulu.');
+                return;
+            }
+
+            // Di aplikasi nyata, di sini Anda akan mengambil data form
+            // dan mengirimkannya ke server atau Google Sheets.
+            // Contoh: const formData = new FormData(surveyForm);
+            // fetch('URL_API_ANDA', { method: 'POST', body: formData });
+
+            // Untuk demo ini, kita hanya akan menyembunyikan form
+            // dan menampilkan pesan sukses.
+            const container = surveyForm.parentElement;
+            surveyForm.remove(); // Hapus form dari DOM
+            container.appendChild(successMessage); // Tambahkan pesan sukses ke container
+            successMessage.classList.remove('hidden');
+            successMessage.classList.add('fade-in');
+        });
+    </script>
+
+</body>
+</html>
