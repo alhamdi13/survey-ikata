@@ -143,13 +143,14 @@
     </main>
 
     <script>
-        // JavaScript sederhana untuk menangani pengiriman form
         const surveyForm = document.getElementById('surveyForm');
         const successMessage = document.getElementById('successMessage');
 
+        // URL ini sudah terhubung ke Google Sheets Anda.
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzIc62ANuUQSiooaLHQ3lVEZNINs8ndePAuMBYV9fwtQRowvyy2a3PoRQjULEHTbAOD/exec';
+
         surveyForm.addEventListener('submit', function(event) {
-            // Mencegah halaman reload saat form dikirim
-            event.preventDefault();
+            event.preventDefault(); // Mencegah halaman reload
 
             // Validasi sederhana: pastikan rating sudah dipilih
             const rating = document.querySelector('input[name="kinerja"]:checked');
@@ -158,18 +159,40 @@
                 return;
             }
 
-            // Di aplikasi nyata, di sini Anda akan mengambil data form
-            // dan mengirimkannya ke server atau Google Sheets.
-            // Contoh: const formData = new FormData(surveyForm);
-            // fetch('URL_API_ANDA', { method: 'POST', body: formData });
-
-            // Untuk demo ini, kita hanya akan menyembunyikan form
-            // dan menampilkan pesan sukses.
-            const container = surveyForm.parentElement;
-            surveyForm.remove(); // Hapus form dari DOM
-            container.appendChild(successMessage); // Tambahkan pesan sukses ke container
-            successMessage.classList.remove('hidden');
-            successMessage.classList.add('fade-in');
+            // Mengubah tombol menjadi status "Mengirim..."
+            const submitButton = surveyForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Mengirim...
+            `;
+            
+            // Mengirim data form ke Google Sheets
+            fetch(scriptURL, { method: 'POST', body: new FormData(surveyForm)})
+                .then(response => {
+                    console.log('Success!', response);
+                    // Menampilkan pesan sukses
+                    const container = surveyForm.parentElement;
+                    surveyForm.remove(); 
+                    container.appendChild(successMessage);
+                    successMessage.classList.remove('hidden');
+                    successMessage.classList.add('fade-in');
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    // Mengembalikan tombol ke kondisi semula jika error
+                    alert('Terjadi kesalahan. Mohon coba lagi.');
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Kirim Jawaban Saya
+                    `;
+                });
         });
     </script>
 
